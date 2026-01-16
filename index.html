@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ishara</title>
+    <h1>Ishara 🎭</h1>
+    <p>Deshi Dumb Charades App</p>
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4c1d95">
+    <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <h1>Desi Charades 🎭</h1>
+                <button id="reset-btn" onclick="resetGame()" title="Restart Game">↺</button>
+            </div>
+            <p>Bangla & Bollywood Edition</p>
+        </header>
+
+        <main id="card-display" class="card">
+            <div id="content-area">
+                <span id="category-tag" class="tag">Welcome</span>
+                <h2 id="main-title">Ready?</h2>
+                <p id="context-info" class="context">Click Next to start the game!</p>
+            </div>
+        </main>
+
+        <div class="controls">
+            <button id="next-btn" onclick="getNextItem()">Next Movie/Song ▶</button>
+            <div id="counter" class="counter">Remaining: --</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+   
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker registered!', reg))
+                    .catch(err => console.log('Service Worker failed!', err));
+            });
+        }
+    </script>
+</body>
+</html>
