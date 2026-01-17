@@ -308,7 +308,7 @@ const masterList = [
     { title: "Kolaveri D", type: "Song", industry: "Bollywood", context: "Movie: 3 | Cast: Dhanush, Shruti Haasan" },
     { title: "Hookah Bar", type: "Song", industry: "Bollywood", context: "Movie: Khiladi 786 | Cast: Akshay Kumar, Asin" },
     { title: "Fevicol Se", type: "Song", industry: "Bollywood", context: "Movie: Dabangg 2 | Cast: Kareena Kapoor, Salman Khan" },
-    { title: "Gade Te Niche", type: "Song", industry: "Bollywood", context: "Movie: Dhamaal | Cast: Riteish Deshmukh, Sanjay Dutt" },
+    
     { title: "Slow Motion", type: "Song", industry: "Bollywood", context: "Movie: Bharat | Cast: Salman Khan, Disha Patani" },
     { title: "Hud Hud Dabangg", type: "Song", industry: "Bollywood", context: "Movie: Dabangg | Cast: Salman Khan" },
     { title: "Seeti Maar", type: "Song", industry: "Bollywood", context: "Movie: Radhe | Cast: Salman Khan, Disha Patani" },
