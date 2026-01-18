@@ -451,7 +451,7 @@ const masterList = [
     { title: "Tooh", type: "Song", industry: "Bollywood", context: "Movie: Gori Tere Pyaar Mein | Cast: Kareena Kapoor, Imran Khan" },
     { title: "Tune Maari Entriyaan", type: "Song", industry: "Bollywood", context: "Movie: Gunday | Cast: Arjun Kapoor, Ranveer Singh, Priyanka Chopra" },
     { title: "Asalaam-e-Ishqum", type: "Song", industry: "Bollywood", context: "Movie: Gunday | Cast: Priyanka Chopra, Ranveer, Arjun" },
-    { title: "Punjabi Wedding Song", type: "Song", industry: "Bollywood", context: "Movie: Hasee Toh Phasee | Cast: Sidharth Malhotra, Parineeti Chopra" },
+    { title: "Drama Queen", type: "Song", industry: "Bollywood", context: "Movie: Hasee Toh Phasee | Cast: Sidharth Malhotra, Parineeti Chopra" },
     { title: "Iski Uski", type: "Song", industry: "Bollywood", context: "Movie: 2 States | Cast: Arjun Kapoor, Alia Bhatt" },
     { title: "Locha-E-Ulfat", type: "Song", industry: "Bollywood", context: "Movie: 2 States | Cast: Arjun Kapoor, Alia Bhatt" },
     { title: "Mast Magan", type: "Song", industry: "Bollywood", context: "Movie: 2 States | Cast: Arjun Kapoor, Alia Bhatt" },
@@ -475,7 +475,6 @@ const masterList = [
     { title: "Khalibali", type: "Song", industry: "Bollywood", context: "Movie: Padmaavat | Cast: Ranveer Singh" },
     { title: "Kamariya", type: "Song", industry: "Bollywood", context: "Movie: Stree | Cast: Nora Fatehi, Rajkummar Rao" },
     { title: "Zingaat", type: "Song", industry: "Bollywood", context: "Movie: Dhadak | Cast: Ishaan Khatter, Janhvi Kapoor" },
-    { title: "Mungda", type: "Song", industry: "Bollywood", context: "Movie: Total Dhamaal | Cast: Sonakshi Sinha, Ajay Devgn" },
     { title: "Gud Naal Ishq Mitha", type: "Song", industry: "Bollywood", context: "Movie: Ek Ladki Ko Dekha Toh Aisa Laga | Cast: Sonam Kapoor, Anil Kapoor, Rajkummar Rao" },
     { title: "Photo", type: "Song", industry: "Bollywood", context: "Movie: Luka Chuppi | Cast: Kartik Aaryan, Kriti Sanon" },
     { title: "Duniyaa", type: "Song", industry: "Bollywood", context: "Movie: Luka Chuppi | Cast: Kartik Aaryan, Kriti Sanon" },
@@ -715,7 +714,7 @@ function getNextItem() {
     updateCounter();
 
     // 6. Trigger Cooldown (5 Seconds)
-    startCooldown(5);
+    startCooldown(10);
 }
 
 function getPrevItem() {
