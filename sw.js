@@ -1,4 +1,4 @@
-const CACHE_NAME = "desi-charades-v2";
+const CACHE_NAME = "desi-charades-v2.1";
 const ASSETS = [
   "./",
   "./index.html",
