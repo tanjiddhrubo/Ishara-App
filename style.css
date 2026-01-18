@@ -7,7 +7,7 @@
 }
 
 body {
-    background: linear-gradient(135deg, #66074d, #f0f034);
+    background: linear-gradient(135deg, #000000, #270f0c);
     color: white;
     height: 100vh;
     display: flex;
@@ -88,7 +88,7 @@ header p {
 .tag {
     display: inline-block;
     background: #fbbf24;
-    color: #4c1d95;
+    color: #380707;
     padding: 5px 15px;
     border-radius: 50px;
     font-size: 0.8rem;
@@ -133,7 +133,7 @@ button:active {
 /* Next Button */
 #next-btn {
     background: #fbbf24;
-    color: #4c1d95;
+    color: #380707;
     padding: 15px;
     font-size: 1.2rem;
     border-radius: 15px;

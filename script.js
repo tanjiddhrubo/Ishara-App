@@ -684,7 +684,7 @@ function getNextItem() {
 
     if (currentList.length === 0) {
         alert("Game Over! We ran out of names. Resetting game...");
-        resetGame(); // Safe reset without confirm if game ends
+        resetGame(); 
         initGame();
         return;
     }
@@ -721,17 +721,10 @@ function getPrevItem() {
     // If no history, do nothing
     if (historyStack.length === 0) return;
 
-    // Get the last item from history
-    // NOTE: In Charades, usually "Previous" is just to check what was skipped.
-    // We don't put it back in the random pool to keep the game moving forward.
+
     const lastItem = historyStack.pop(); 
     
-    // Determine if we need to save the *current* item back to history?
-    // For simplicity: Previous just shows the last card so you can act it out.
-    // We swap: Current becomes the one we went back to.
-    
-    // (Optional: You could push the 'currentItem' back to 'currentList' if you wanted strict undo, 
-    // but for 'forcing him to act', just showing it is enough).
+ 
     
     currentItem = lastItem; 
     renderCard(currentItem);
