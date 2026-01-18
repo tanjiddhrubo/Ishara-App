@@ -513,7 +513,7 @@ const masterList = [
     { title: "Badtameez Dil", type: "Song", industry: "Bollywood", context: "Movie: Yeh Jawaani Hai Deewani | Cast: Ranbir Kapoor, Deepika Padukone" },
     { title: "Dilli 6", type: "Song", industry: "Bollywood", context: "Movie: Delhi-6 | Cast: Abhishek Bachchan, Sonam Kapoor" },
     { title: "Maahi Ve", type: "Song", industry: "Bollywood", context: "Movie: Kal Ho Naa Ho | Cast: Preity Zinta, Shah Rukh Khan, Saif Ali Khan" },
-    { title: "Dupatta Tera Nau Da", type: "Song", industry: "Bollywood", context: "Movie: Partner | Cast: Salman Khan, Govinda, Katrina, Lara" },
+    { title: "Dupatta Tera Nau Rang Da", type: "Song", industry: "Bollywood", context: "Movie: Partner | Cast: Salman Khan, Govinda, Katrina, Lara" },
     { title: "Just Chill", type: "Song", industry: "Bollywood", context: "Movie: Maine Pyaar Kyun Kiya? | Cast: Salman Khan, Katrina Kaif" },
     { title: "Dil Dooba", type: "Song", industry: "Bollywood", context: "Movie: Khakee | Cast: Akshay Kumar, Aishwarya Rai" },
     { title: "Beedi", type: "Song", industry: "Bollywood", context: "Movie: Omkara | Cast: Bipasha Basu, Ajay Devgn, Saif Ali Khan" },
@@ -642,25 +642,31 @@ const masterList = [
     { title: "Modhu Hoi Hoi Bish Khaila", type: "Song", industry: "Bangla", context: "Artist: Jony" },
 ];
 
+
 // --- GAME LOGIC ---
 
 let currentList = [];
+let historyStack = []; // To store items shown
+let currentItem = null; // The one currently on screen
 
-// Initialize: Reset list and UI
 function initGame() {
-    currentList = [...masterList]; // Refill the list
+    currentList = [...masterList]; 
+    historyStack = [];
+    currentItem = null;
     updateCounter();
+    // Disable prev button on start
+    document.getElementById("prev-btn").disabled = true;
 }
 
-// Reset Button Function
 function resetGame() {
     const confirmReset = confirm("Start a new game? This will reset the list.");
     if (confirmReset) {
         initGame();
-        // Reset UI to Welcome State
+        // Reset UI
         document.getElementById("main-title").innerText = "Ready?";
         document.getElementById("category-tag").innerText = "New Game";
         document.getElementById("context-info").innerText = "Click Next to start!";
+        document.getElementById("prev-btn").disabled = true;
     }
 }
 
@@ -669,37 +675,82 @@ function updateCounter() {
     counterEl.innerText = `Remaining: ${currentList.length} / ${masterList.length}`;
 }
 
+// --- MAIN ACTIONS ---
+
 function getNextItem() {
+    const btn = document.getElementById("next-btn");
+    
+    // 1. Cooldown Check
+    if (btn.disabled) return;
+
     if (currentList.length === 0) {
         alert("Game Over! We ran out of names. Resetting game...");
-        resetGame(); // Auto-trigger reset logic (without confirm)
-        initGame(); // Force refill
+        resetGame(); // Safe reset without confirm if game ends
+        initGame();
         return;
     }
 
-    // 1. Pick a random index
+    // 2. Play Sound (The "Snitch" Beep)
+    playDing();
+
+    // 3. Save current item to history before showing new one
+    if (currentItem) {
+        historyStack.push(currentItem);
+        // Enable Previous button since we now have history
+        document.getElementById("prev-btn").disabled = false;
+    }
+
+    // 4. Pick random item
     const randomIndex = Math.floor(Math.random() * currentList.length);
-    
-    // 2. Get the item
     const item = currentList[randomIndex];
-
-    // 3. Remove it from currentList
+    
+    // Remove from pool
     currentList.splice(randomIndex, 1);
+    
+    // Set as current
+    currentItem = item;
 
-    // 4. Update UI
+    // 5. Update UI
     renderCard(item);
     updateCounter();
+
+    // 6. Trigger Cooldown (5 Seconds)
+    startCooldown(5);
+}
+
+function getPrevItem() {
+    // If no history, do nothing
+    if (historyStack.length === 0) return;
+
+    // Get the last item from history
+    // NOTE: In Charades, usually "Previous" is just to check what was skipped.
+    // We don't put it back in the random pool to keep the game moving forward.
+    const lastItem = historyStack.pop(); 
+    
+    // Determine if we need to save the *current* item back to history?
+    // For simplicity: Previous just shows the last card so you can act it out.
+    // We swap: Current becomes the one we went back to.
+    
+    // (Optional: You could push the 'currentItem' back to 'currentList' if you wanted strict undo, 
+    // but for 'forcing him to act', just showing it is enough).
+    
+    currentItem = lastItem; 
+    renderCard(currentItem);
+
+    // If history is empty now, disable button
+    if (historyStack.length === 0) {
+        document.getElementById("prev-btn").disabled = true;
+    }
 }
 
 function renderCard(item) {
     const titleEl = document.getElementById("main-title");
     const tagEl = document.getElementById("category-tag");
     const contextEl = document.getElementById("context-info");
-
-    // Animation: Fade out slightly then update
     const card = document.getElementById("card-display");
+
+    // Animation
     card.style.transform = "scale(0.95)";
-    
     setTimeout(() => {
         titleEl.innerText = item.title;
         tagEl.innerText = `${item.industry} ${item.type}`;
@@ -708,5 +759,54 @@ function renderCard(item) {
     }, 100);
 }
 
-// Start the game logic when page loads
+// --- HELPERS ---
+
+function startCooldown(seconds) {
+    const btn = document.getElementById("next-btn");
+    const originalText = "Next ▶";
+    let timeLeft = seconds;
+
+    btn.disabled = true;
+    btn.classList.add("disabled-btn");
+    btn.innerText = `Wait ${timeLeft}s`;
+
+    const timer = setInterval(() => {
+        timeLeft--;
+        if (timeLeft > 0) {
+            btn.innerText = `Wait ${timeLeft}s`;
+        } else {
+            clearInterval(timer);
+            btn.disabled = false;
+            btn.classList.remove("disabled-btn");
+            btn.innerText = originalText;
+        }
+    }, 1000);
+}
+
+function playDing() {
+    try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        
+        const ctx = new AudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.type = "sine"; 
+        osc.frequency.setValueAtTime(800, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.1);
+        
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+
+        osc.start();
+        osc.stop(ctx.currentTime + 0.3);
+    } catch (e) {
+        console.error("Audio error", e);
+    }
+}
+
 initGame();

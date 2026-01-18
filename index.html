@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ishara</title>
+    <title>Ishara</title>
     <link rel="stylesheet" href="style.css">
     
     <link rel="manifest" href="manifest.json">
@@ -13,13 +13,13 @@
 <body>
 
     <div class="container">
-       <header>
-    <div class="header-top">
-        <h1>Ishara 🎭</h1>
-        <button id="reset-btn" onclick="resetGame()" title="Restart Game">↺</button>
-    </div>
-    <p>Deshi DumbCharades App</p>
-</header>
+        <header>
+            <div class="header-top">
+                <h1>Ishara 🎭</h1>
+                <button id="reset-btn" onclick="resetGame()" title="Restart Game">↺</button>
+            </div>
+            <p>Deshi DumbCharades App</p>
+        </header>
 
         <main id="card-display" class="card">
             <div id="content-area">
@@ -30,13 +30,13 @@
         </main>
 
         <div class="controls">
-            <button id="next-btn" onclick="getNextItem()">Next Movie/Song ▶</button>
+            <div class="btn-group">
+                <button id="prev-btn" onclick="getPrevItem()" disabled>↩ Undo</button>
+                <button id="next-btn" onclick="getNextItem()">Next ▶</button>
+            </div>
             <div id="counter" class="counter">Remaining: --</div>
         </div>
     </div>
-
-    <script src="script.js"></script>
-   
 
     <script>
         if ('serviceWorker' in navigator) {
@@ -47,5 +47,6 @@
             });
         }
     </script>
+    <script src="script.js"></script>
 </body>
 </html>
