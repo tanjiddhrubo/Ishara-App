@@ -1,10 +1,10 @@
 {
-    "name": "Ishara - Deshi DumbCharades",
-    "short_name": "Ishara",
+    "name": "ISHARA - Deshi Dumb Charades",
+    "short_name": "ISHARA",
     "start_url": "./index.html",
     "display": "standalone",
-    "background_color": "#4c1d95",
-    "theme_color": "#4c1d95",
+    "background_color": "#000000",
+    "theme_color": "#000000",
     "orientation": "portrait",
     "icons": [
     {
