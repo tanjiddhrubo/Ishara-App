@@ -1,4 +1,4 @@
-const CACHE_NAME = "desi-charades-v3.3";
+const CACHE_NAME = "desi-charades-v3.5";
 const ASSETS = [
   "./",
   "./index.html",
@@ -6,7 +6,9 @@ const ASSETS = [
   "./script.js",
   "./manifest.json",
   "./icon-192.png",
-  "./icon-512.png"
+  "./icon-512.png",
+  "./faaah.mp3"
+
 ];
 
 // 1. Install Service Worker & Cache Assets

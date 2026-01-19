@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DumbCharades.io</title>
+    <title>Dumb Charades.io</title>
     <link rel="stylesheet" href="style.css">
-    
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#000000">
     <link rel="apple-touch-icon" href="icon-192.png">
@@ -15,17 +14,20 @@
     <div class="container">
         <header>
             <div class="header-top">
-                <h1>DumbCharades.io 🎬</h1>
+                <h1>Dumb Charades.io 🎬</h1>
                 <button id="reset-btn" onclick="resetGame()" title="Restart Game">↺</button>
             </div>
-            <p>Deshi Dumb Charades App</p>
+            <p>Deshi DumbCharades App</p>
         </header>
 
         <main id="card-display" class="card">
             <div id="content-area">
                 <span id="category-tag" class="tag">Welcome</span>
+                
+                <div id="timer" class="timer-display">1:15</div>
+
                 <h2 id="main-title">Ready?</h2>
-                <p id="context-info" class="context">Click Next to start the game!</p>
+                <p id="context-info" class="context">Click Next to start!</p>
             </div>
         </main>
 
@@ -41,9 +43,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('Service Worker registered!', reg))
-                    .catch(err => console.log('Service Worker failed!', err));
+                navigator.serviceWorker.register('./sw.js');
             });
         }
     </script>

@@ -166,3 +166,25 @@ button:disabled, .disabled-btn {
     font-size: 0.8rem;
     opacity: 0.6;
 }
+
+/* NEW TIMER STYLE */
+.timer-display {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #fbbf24; /* Amber color */
+    margin: 10px 0;
+    font-variant-numeric: tabular-nums; /* Keeps numbers steady */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Red color when time is running out (last 10s) */
+.timer-danger {
+    color: #ef4444 !important;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}

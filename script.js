@@ -647,23 +647,24 @@ const masterList = [
 // --- GAME LOGIC ---
 
 let currentList = [];
-let historyStack = []; // To store items shown
-let currentItem = null; // The one currently on screen
+let historyStack = []; 
+let currentItem = null;
+let timerInterval = null; // Variable to hold the timer
 
 function initGame() {
     currentList = [...masterList]; 
     historyStack = [];
     currentItem = null;
     updateCounter();
-    // Disable prev button on start
     document.getElementById("prev-btn").disabled = true;
+    document.getElementById("timer").innerText = "1:15"; // Reset text
 }
 
 function resetGame() {
-    const confirmReset = confirm("Start a new game? This will reset the list.");
+    const confirmReset = confirm("Start a new game?");
     if (confirmReset) {
+        clearInterval(timerInterval); // Stop any running timer
         initGame();
-        // Reset UI
         document.getElementById("main-title").innerText = "Ready?";
         document.getElementById("category-tag").innerText = "New Game";
         document.getElementById("context-info").innerText = "Click Next to start!";
@@ -676,62 +677,128 @@ function updateCounter() {
     counterEl.innerText = `Remaining: ${currentList.length} / ${masterList.length}`;
 }
 
+// --- TIMER LOGIC  ---
+
+
+
+function startRoundTimer() {
+    clearInterval(timerInterval); 
+    const timerEl = document.getElementById("timer");
+    
+    // Reset Style
+    timerEl.classList.remove("timer-danger");
+    
+    // Set Time: 1 minute 15 seconds = 75 seconds
+    let timeLeft = 75; 
+    
+    updateTimerDisplay(timeLeft);
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay(timeLeft);
+
+        // --- URGENCY PHASE (Last 10 Seconds) ---
+        if (timeLeft <= 10 && timeLeft > 0) {
+            timerEl.classList.add("timer-danger");
+            playTick(); 
+        }
+
+        // --- TIME'S UP ---
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            timerEl.innerText = "0:00";
+            
+            // Play the "Faaah" Sound
+            const audio = new Audio("faaah.mp3");
+            audio.play().catch(e => console.log("Audio play failed:", e));
+        }
+    }, 1000);
+}
+
+// --- NEW SOUND FUNCTIONS ---
+
+// Generates a sharp "Clock Tick" sound using code
+function playTick() {
+    try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+
+        // Reuse context if possible, or create new
+        const ctx = new AudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        // Sound: Short, sharp "Woodblock" click
+        osc.type = "square"; 
+        osc.frequency.setValueAtTime(800, ctx.currentTime);
+        
+        // Very short duration (0.05s)
+        gain.gain.setValueAtTime(0.1, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+
+        osc.start();
+        osc.stop(ctx.currentTime + 0.05);
+    } catch (e) {
+        console.error("Tick error", e);
+    }
+}
+
+
+function updateTimerDisplay(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    // Format as M:SS (e.g., 1:05)
+    document.getElementById("timer").innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
+}
+
 // --- MAIN ACTIONS ---
 
 function getNextItem() {
     const btn = document.getElementById("next-btn");
     
-    // 1. Cooldown Check
     if (btn.disabled) return;
 
     if (currentList.length === 0) {
-        alert("Game Over! We ran out of names. Resetting game...");
-        resetGame(); 
+        alert("Game Over! Resetting...");
+        resetGame();
         initGame();
         return;
     }
 
-    // 2. Play Sound (The "Snitch" Beep)
     playDing();
 
-    // 3. Save current item to history before showing new one
     if (currentItem) {
         historyStack.push(currentItem);
-        // Enable Previous button since we now have history
         document.getElementById("prev-btn").disabled = false;
     }
 
-    // 4. Pick random item
     const randomIndex = Math.floor(Math.random() * currentList.length);
     const item = currentList[randomIndex];
-    
-    // Remove from pool
     currentList.splice(randomIndex, 1);
-    
-    // Set as current
     currentItem = item;
 
-    // 5. Update UI
     renderCard(item);
     updateCounter();
-
-    // 6. Trigger Cooldown (5 Seconds)
-    startCooldown(10);
+    startCooldown(5);
+    
+    // START THE TIMER
+    startRoundTimer();
 }
 
 function getPrevItem() {
-    // If no history, do nothing
     if (historyStack.length === 0) return;
-
+    
+    
+    clearInterval(timerInterval);
+    document.getElementById("timer").innerText = "Paused";
 
     const lastItem = historyStack.pop(); 
-    
- 
-    
     currentItem = lastItem; 
     renderCard(currentItem);
 
-    // If history is empty now, disable button
     if (historyStack.length === 0) {
         document.getElementById("prev-btn").disabled = true;
     }
@@ -743,7 +810,6 @@ function renderCard(item) {
     const contextEl = document.getElementById("context-info");
     const card = document.getElementById("card-display");
 
-    // Animation
     card.style.transform = "scale(0.95)";
     setTimeout(() => {
         titleEl.innerText = item.title;
@@ -752,8 +818,6 @@ function renderCard(item) {
         card.style.transform = "scale(1)";
     }, 100);
 }
-
-// --- HELPERS ---
 
 function startCooldown(seconds) {
     const btn = document.getElementById("next-btn");
@@ -764,12 +828,12 @@ function startCooldown(seconds) {
     btn.classList.add("disabled-btn");
     btn.innerText = `Wait ${timeLeft}s`;
 
-    const timer = setInterval(() => {
+    const cTimer = setInterval(() => {
         timeLeft--;
         if (timeLeft > 0) {
             btn.innerText = `Wait ${timeLeft}s`;
         } else {
-            clearInterval(timer);
+            clearInterval(cTimer);
             btn.disabled = false;
             btn.classList.remove("disabled-btn");
             btn.innerText = originalText;
