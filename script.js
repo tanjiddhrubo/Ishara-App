@@ -1,4 +1,8 @@
+// Pre-load the audio object globally
+const faaahSound = new Audio("faaah.mp3");
 // --- THE DATABASE ---
+
+
 const masterList = [
     // --- BOLLYWOOD MOVIES ---
     { title: "3 Idiots", type: "Movie", industry: "Bollywood", context: "Cast: Aamir Khan, Kareena Kapoor, R. Madhavan" },
@@ -709,8 +713,7 @@ function startRoundTimer() {
             timerEl.innerText = "0:00";
             
             // Play the "Faaah" Sound
-            const audio = new Audio("faaah.mp3");
-            audio.play().catch(e => console.log("Audio play failed:", e));
+            faaahSound.play().catch(e => console.log("Audio play failed:", e));
         }
     }, 1000);
 }
@@ -759,6 +762,13 @@ function updateTimerDisplay(seconds) {
 function getNextItem() {
     const btn = document.getElementById("next-btn");
     
+    faaahSound.volume = 0; 
+    faaahSound.play().then(() => {
+        faaahSound.pause();
+        faaahSound.currentTime = 0; 
+        faaahSound.volume = 1; 
+    }).catch(e => console.log("Audio unlock failed", e));
+
     if (btn.disabled) return;
 
     if (currentList.length === 0) {
