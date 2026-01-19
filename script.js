@@ -639,6 +639,8 @@ const masterList = [
     { title: "Fet Furudde Tuwar Lai", type: "Song", industry: "Bangla", context: "Artist: Chatgaiya Folk" },
     { title: "Head Master", type: "Song", industry: "Bangla", context: "Artist: Chatgaiya Folk" },
     { title: "Modhu Hoi Hoi Bish Khaila", type: "Song", industry: "Bangla", context: "Artist: Jony" },
+    { title: "Tumi", type: "Song", industry: "Bangla", context: "Movie: Utshob | Level five" },
+    {title: "Jala Jala Jala", type: "Song", industry: "Bangla", context: "Artist: Miles"},
 ];
 
 
