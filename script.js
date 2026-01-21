@@ -645,6 +645,24 @@ const masterList = [
     { title: "Modhu Hoi Hoi Bish Khaila", type: "Song", industry: "Bangla", context: "Artist: Jony" },
     { title: "Tumi", type: "Song", industry: "Bangla", context: "Movie: Utshob | Level five" },
     {title: "Jala Jala Jala", type: "Song", industry: "Bangla", context: "Artist: Miles"},
+
+    // --- LATEST ADDITIONS (User Requested) ---
+    { title: "Tunak Tunak Tun", type: "Song", industry: "Bollywood", context: "Artist: Daler Mehndi (Indipop)" },
+    { title: "Ashona", type: "Song", industry: "Bangla", context: "Artist: Tahsan (Band)" },
+    { title: "Tinku Jiya", type: "Song", industry: "Bollywood", context: "Movie: Yamla Pagla Deewana | Cast: Dharmendra, Bobby Deol" },
+    { title: "Palki Mein Hoke Sawar", type: "Song", industry: "Bollywood", context: "Movie: Khalnayak | Cast: Madhuri Dixit" },
+    { title: "Ore Sampan Wala", type: "Song", industry: "Bangla", context: "Movie: Ore Sampan Wala | Cast: Manna, Shabnur" },
+    { title: " Sweety", type: "Song", industry: "Bangla", context: "Artist:   Hasan" },
+    { title: "Ai Aile Enka Goror", type: "Song", industry: "Bangla", context: "Region: Chittagonian Folk Song" },
+    { title: "Ami Chini Go Chini Tomare", type: "Song", industry: "Bangla", context: "Category: Rabindra Sangeet | Movie: Charulata" },
+    { title: "Shundori Furi", type: "Song", industry: "Bangla", context: "Region: Sylheti Wedding Song" },
+    { title: "Lilabali", type: "Song", industry: "Bangla", context: "Category: Wedding Song | Coke Studio" },
+    { title: "Ekti Chilo Shonar Konna", type: "Song", industry: "Bangla", context: "Artist: Folk Song" },
+    { title: "Coffee Houser Sei Addata", type: "Song", industry: "Bangla", context: "Artist: Manna Dey" },
+    { title: "Pallu Latke", type: "Song", industry: "Bollywood", context: "Movie: Shaadi Mein Zaroor Aana | Cast: Rajkummar Rao, Kriti Kharbanda" },
+    { title: "Suit Suit (Tenu Suit Karda)", type: "Song", industry: "Bollywood", context: "Movie: Hindi Medium | Cast: Irrfan Khan, Saba Qamar" },
+    { title: "Sweety Tera Drama", type: "Song", industry: "Bollywood", context: "Movie: Bareilly Ki Barfi | Cast: Kriti Sanon, Ayushmann Khurrana" },
+
 ];
 
 
