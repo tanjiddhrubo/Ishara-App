@@ -663,6 +663,14 @@ const masterList = [
     { title: "Suit Suit (Tenu Suit Karda)", type: "Song", industry: "Bollywood", context: "Movie: Hindi Medium | Cast: Irrfan Khan, Saba Qamar" },
     { title: "Sweety Tera Drama", type: "Song", industry: "Bollywood", context: "Movie: Bareilly Ki Barfi | Cast: Kriti Sanon, Ayushmann Khurrana" },
 
+    // --- LATEST ADDITIONS (User Requested) ---
+    { title: "Bhalo Koriya Bajao Dotara", type: "Song", industry: "Bangla", context: "Movie: Shatru | Cast: Humayun Faridi (Iconic Dance)" },
+    { title: "Amar Gorur Garite", type: "Song", industry: "Bangla", context: "Movie: Akhi Milan | Cast: Ilias Kanchan, Shujorita" },
+    { title: "Nachde Ne Saare", type: "Song", industry: "Bollywood", context: "Movie: Baar Baar Dekho | Cast: Katrina Kaif, Sidharth Malhotra" },
+    { title: "Jamal Kudu", type: "Song", industry: "Bollywood", context: "Movie: Animal | Cast: Bobby Deol (Glass on head)" },
+    { title: "Tootak Tootak Tootiyan", type: "Song", industry: "Bollywood", context: "Artist: Malkit Singh | Hook: Hey Jamalo" },
+
+
 ];
 
 
