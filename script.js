@@ -669,6 +669,8 @@ const masterList = [
     { title: "Nachde Ne Saare", type: "Song", industry: "Bollywood", context: "Movie: Baar Baar Dekho | Cast: Katrina Kaif, Sidharth Malhotra" },
     { title: "Jamal Kudu", type: "Song", industry: "Bollywood", context: "Movie: Animal | Cast: Bobby Deol (Glass on head)" },
     { title: "Tootak Tootak Tootiyan", type: "Song", industry: "Bollywood", context: "Artist: Malkit Singh | Hook: Hey Jamalo" },
+{ title: "Iski Uski", type: "Song", industry: "Bollywood", context: "Movie: 2 States | Cast: Arjun Kapoor, Alia Bhaat" },
+
 
 
 ];
